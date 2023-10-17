@@ -2,10 +2,30 @@
   "name": "ruuum",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "name": "Aleksey Chornoivan",
+    "email": "alekseyuadnepr@gmail.com"
+  },
+  "build": {
+    "productName": "RUUUM",
+    "appId": "com.ruuum",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "alekseyua",
+        "repo": "https://github.com/alekseyua/ruuum.git"
+      }
+    ]
+  },
+  "description": "Ruuum for stock auto app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.4.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -14,8 +34,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "concurrently -k \"BROWSER=none yarn start\" \"yarn:electron\"",
+    "electron": "wait-on tcp:3000 && electron .",
+    "electron:build:l": "rm -rf dist && yarn build && electron-builder build --publish never -l"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "electron": "22",
+    "electron-builder": "^24.6.4",
+    "wait-on": "^7.0.1"
   }
 }
