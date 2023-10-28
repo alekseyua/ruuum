@@ -1,6 +1,6 @@
 {
   "name": "ruuum",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
@@ -11,26 +11,40 @@
   "build": {
     "productName": "RUUUM",
     "appId": "com.ruuum.app",
+    "copyright": "Copyright © 2023 ${author}",
     "win": {
+      "artifactName": "${productName}-win.${ext}",
+      "icon": "./public/logo512.png",
       "target": [
         "nsis"
       ],
       "verifyUpdateCodeSignature": false
     },
     "linux": {
+      "artifactName": "${productName}-linux",
+      "icon": "./public/logo512.png",
       "target": [
         "appImage"
       ]
     },
     "mac": {
+      "artifactName": "${productName}-macos",
       "category": "public.app-category.business",
       "type": "distribution",
+      "icon": "./public/favicon.icns",
       "target": [
         "dmg"
       ]
     },
+    "files": [
+      "./dist/**/*",
+      "./node_modules/**/*",
+      "./public/**/*",
+      "*.js"
+    ],
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "public"
     }
   },
   "description": "Ruuum for stock auto app",
@@ -39,9 +53,9 @@
   },
   "scripts": {
     "dev": "concurrently -k \"yarn:electron .\"",
-    "electron:build:l": "rm -rf dist && electron-builder -p always -l",
+    "electron:build:l": "electron-builder -p never -l",
     "electron:build:m": "electron-builder -p always -m",
-    "electron:build:w32": "rm -rf dist && electron-builder -w --ia32 -p never",
+    "electron:build:w32": "electron-builder -w --ia32 -p never",
     "electron:build:w64": "electron-builder -w --x64 -p never",
     "release": "rm -rf dist && electron-builder --linux -p never && electron-builder --win --x64 -p never && electron-builder --win --ia32 -p never"
   },
