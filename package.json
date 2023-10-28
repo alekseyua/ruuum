@@ -1,0 +1,68 @@
+{
+  "name": "ruuum",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "name": "Aleksey Chornoivan",
+    "email": "alekseyuadnepr@gmail.com"
+  },
+  "build": {
+    "productName": "RUUUM",
+    "appId": "com.ruuum.app",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "verifyUpdateCodeSignature": false
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.business",
+      "type": "distribution",
+      "target": [
+        "dmg"
+      ]
+    },
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "description": "Ruuum for stock auto app",
+  "dependencies": {
+    "electron-is-dev": "^2.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k \"yarn:electron .\"",
+    "electron:build:l": "rm -rf dist && electron-builder -p always -l",
+    "electron:build:m": "rm -rf dist && electron-builder -p always -m",
+    "electron:build:w": "rm -rf dist && electron-builder -p always -w --ia32",
+    "release": "rm -rf dist && electron-builder --linux --win --x64 --ia32 -p never"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.1",
+    "electron": "22",
+    "electron-builder": "22",
+    "electron-installer-snap": "^5.2.0",
+    "sass": "^1.69.4",
+    "wait-on": "^7.0.1"
+  }
+}
