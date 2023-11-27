@@ -27,7 +27,7 @@ async function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             enableRemoteModule: false,
-            devTools: isDev,
+            devTools: false,
             contextIsolation: true,
             // preload: path.join(__dirname,'preload.js')
         }
@@ -35,10 +35,11 @@ async function createWindow() {
     });
     mainWindow.center();
     // mainWindow.loadURL('http://localhost:3000');
-    mainWindow.loadURL('http://95.181.224.33:5555');
+    // mainWindow.loadURL('http://95.181.224.33:5555');
     // mainWindow.loadURL('https://bot-auto-razbor.vercel.app');
-    isDev && 
-    mainWindow.webContents.openDevTools();
+    mainWindow.loadURL('https://front.botrazbor.ru/');
+    // isDev && 
+    // mainWindow.webContents.openDevTools();
     mainWindow.once('ready-to-show', () => mainWindow.show());
     mainWindow.on("closed", () => (mainWindow = null));
    
